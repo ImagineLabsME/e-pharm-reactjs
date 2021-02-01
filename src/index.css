@@ -1,13 +1,165 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+  font-family: var(--base-font-family);
+  font-size: var(--base-font-size);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body,
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+:root {
+  /* color palettes */
+  --base-color: #00b3df;
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --white-smoke: #F5F5F5;
+  --success: #4bb543;
+  --danger: #e52313;
+
+  /* font family */
+  --base-font-family: "Almarai", sans-serif;
+
+  /* font weights */
+  --regular: 400;
+  --bold: 700;
+
+  /* font sizes */
+  --base-font-size: 18px;
+
+  /* configurations */
+  --header-height: 60px;
+  --full-height-section: calc(100vh - var(--header-height));
+}
+
+a {
+  color: unset;
+  text-decoration: none;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h6,
+h5,
+h4,
+h3,
+h2,
+h1 {
+  margin: 12px 0;
+}
+
+#router-components {
+  margin-top: var(--header-height);
+  transition: margin 0.5s;
+}
+
+.call-to-action-button {
+  position: relative;
+  width: 160px;
+  height: 50px;
+  margin: 12px;
+  border: 2px solid var(--base-color);
+  border-radius: 26px;
+  font-size: var(--base-font-size);
+  font-weight: var(--bold);
+  background-color: transparent;
+  color: var(--base-color);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.call-to-action-button:hover {
+  color: var(--white);
+}
+
+.call-to-action-button:focus {
+  outline: none;
+}
+
+.call-to-action-button::before {
+  content: attr(data-text);
+}
+
+.call-to-action-button::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  background-color: var(--base-color);
+  width: 100%;
+  height: 0px;
+  transition: linear height 0.3s;
+}
+
+.call-to-action-button:hover::after {
+  height: 100%;
+}
+
+.call-to-action-loading-button {
+  width: 30px;
+  height: 30px;
+  content: "";
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-radius: 100%;
+  pointer-events: none;
+  animation: 0.8s linear infinite loadingEffect;
+}
+
+.call-to-action-loading-button::before {
+  content: "";
+}
+
+@keyframes loadingEffect {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media only screen and (min-width: 576px) {
+  html[lang="ar"] #router-components {
+    margin-right: 200px;
+  }
+
+  html[lang="en"] #router-components {
+    margin-left: 200px;
+  }
 }
