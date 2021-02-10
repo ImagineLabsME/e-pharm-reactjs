@@ -8,7 +8,9 @@ import Sidebar from "./sidebar";
 import Header from "./header";
 import Error404 from "./error404";
 import Homepage from "./homepage";
+import Contact from "./contact";
 import AddListing from "./listings/add/AddListing";
+import ViewListings from "./listings/view/ViewListings";
 
 const App = () => {
   // const [cookie, setCookie] = useCookies(["language"]);
@@ -39,6 +41,8 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={ Homepage } />
           <Route exact path="/listings/add" component={ AddListing } />
+          <Route exact path="/listings/view" component={ ViewListings } />
+          <Route exact path="/contact" component={ Contact } />
           <Route path="*" component={ Error404 } />
         </Switch>
       </div>
