@@ -6,9 +6,6 @@ import { Link } from "react-router-dom";
 import "./index.css";
 
 const Sidebar = ({ toggleSidebar }) => {
-  // ---------------------
-  // split code later
-  // ---------------------
   return (
     <nav id="sidebar">
       <ul className="sidebar-unordered-list">
@@ -25,7 +22,7 @@ const Sidebar = ({ toggleSidebar }) => {
         </li>
 
         <li className="sidebar-list-item" onClick={ toggleSidebar }>
-          <Link className="sidebar-link" to="/">
+          <Link className="sidebar-link" to="/listings/view">
             <span>View Listings</span>
             <i className="fas fa-list"></i>
           </Link>
@@ -39,7 +36,7 @@ const Sidebar = ({ toggleSidebar }) => {
         </li>
 
         <li className="sidebar-list-item" onClick={ toggleSidebar }>
-          <Link className="sidebar-link" to="/">
+          <Link className="sidebar-link" to="/contact">
             <span>Help</span>
             <i className="fas fa-hands-helping"></i>
           </Link>
