@@ -1,0 +1,21 @@
+#page-404 {
+  padding: 12px;
+  min-height: var(--full-height-section);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#page-404 > .content-container {
+    max-width: 500px;
+    text-align: center;
+}
+
+#page-404 > .content-container > h1 {
+    font-size: 5rem;
+}
+
+#page-404 > .content-container > p {
+    margin: 12px 0;
+}
