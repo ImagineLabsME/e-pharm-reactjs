@@ -16,7 +16,10 @@ const Header = ({ isSidebar, toggleSidebar }) => {
       </div>
 
       <div id="header-logo">
-        <img src="./assets/imaginelabs-logo.svg" alt="logo" />
+        <img
+          src={`${window.location.origin}/assets/imagineLabs-logo.svg`}
+          alt="logo"
+        />
       </div>
     </div>
   );
