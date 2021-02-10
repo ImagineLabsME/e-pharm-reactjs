@@ -12,7 +12,7 @@ const AddListing = () => {
     phone: "",
     location: "",
     medication_name: "",
-    quantity: "",
+    quantity: 1,
     needed_by: "",
   });
 
@@ -163,6 +163,15 @@ const AddListing = () => {
             data
           );
 
+          res.data.status === "success" && setData({
+            name: "",
+            phone: "",
+            location: "",
+            medication_name: "",
+            quantity: 1,
+            needed_by: "",
+          });
+
           setSubmitMessage(res.data.data.message);
         } catch (error) {
           setSubmitMessage(error.response.data.data.errorMessage);
@@ -186,6 +195,7 @@ const AddListing = () => {
             className={`form-input ${
               dataErrors.nameError ? "form-input-error" : ""
             }`}
+            value={ data.name }
             onChange={ handleInputChange }
           />
           <span>{ dataErrors.nameError }</span>
@@ -203,6 +213,7 @@ const AddListing = () => {
                   : "form-input-error"
                 : ""
             }`}
+            value={ data.phone }
             onChange={ handleInputChange }
           />
           <span>{ dataErrors.phoneError }</span>
@@ -216,6 +227,7 @@ const AddListing = () => {
             className={`form-input ${
               dataErrors.locationError ? "form-input-error" : ""
             }`}
+            value={ data.location }
             onChange={ handleInputChange }
           />
           <span>{ dataErrors.locationError }</span>
@@ -229,6 +241,7 @@ const AddListing = () => {
             className={`form-input ${
               dataErrors.medicationNameError ? "form-input-error" : ""
             }`}
+            value={ data.medication_name }
             onChange={ handleInputChange }
           />
           <span>{ dataErrors.medicationNameError }</span>
@@ -242,6 +255,7 @@ const AddListing = () => {
             className={`form-input ${
               dataErrors.quantityError ? "form-input-error" : ""
             }`}
+            value={ data.quantity }
             onChange={ handleInputChange }
             min="1"
           />
@@ -260,6 +274,7 @@ const AddListing = () => {
                   : "form-input-error"
                 : ""
             }`}
+            value={ data.needed_by }
             onChange={ handleInputChange }
           />
           <span>{ dataErrors.dateError }</span>

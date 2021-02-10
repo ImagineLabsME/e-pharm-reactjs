@@ -109,6 +109,12 @@ const Contact = () => {
             data
           );
 
+          res.data.status === "success" && setData({
+            fullName: "",
+            email: "",
+            message: "",
+          });
+
           setSubmitMessage(res.data.message);
         } catch (error) {
           setSubmitMessage(error.response.data.errorMessage);
@@ -132,9 +138,10 @@ const Contact = () => {
             className={`form-input ${
               dataErrors.fullNameError ? "form-input-error" : ""
             }`}
-            onChange={handleInputChange}
+            value={ data.fullName }
+            onChange={ handleInputChange }
           />
-          <span>{dataErrors.fullNameError}</span>
+          <span>{ dataErrors.fullNameError }</span>
         </div>
 
         <div className="form-input-container">
@@ -149,9 +156,10 @@ const Contact = () => {
                   : "form-input-error"
                 : ""
             }`}
-            onChange={handleInputChange}
+            value={ data.email }
+            onChange={ handleInputChange }
           />
-          <span>{dataErrors.emailError}</span>
+          <span>{ dataErrors.emailError }</span>
         </div>
 
         <div className="form-input-container">
@@ -163,19 +171,20 @@ const Contact = () => {
             className={`form-input ${
               dataErrors.messageError ? "form-input-error" : ""
             }`}
-            onChange={handleInputChange}
+            value={ data.message }
+            onChange={ handleInputChange }
           />
-          <span>{dataErrors.messageError}</span>
+          <span>{ dataErrors.messageError }</span>
         </div>
 
-        <p style={{ textAlign: "center", margin: "12px 0" }}>{submitMessage}</p>
+        <p style={{ textAlign: "center", margin: "12px 0" }}>{ submitMessage }</p>
 
         <button
           className={`call-to-action-button margin-center ${
             isLoading ? "call-to-action-loading-button" : ""
           }`}
           data-text="Submit"
-          onClick={handleSubmit}
+          onClick={ handleSubmit }
           tabIndex={`${isLoading ? "-1" : ""}`}
         ></button>
       </form>
