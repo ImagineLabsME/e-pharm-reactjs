@@ -1,8 +1,9 @@
-#add-listings {
+/* Add listing */
+.page-section {
   padding: 12px;
 }
 
-#add-listings > h1 {
+.page-section > h1 {
   width: 100%;
   text-align: center;
   color: var(--black);
@@ -88,3 +89,17 @@ html[lang="ar"] .form-input-success {
 html[lang="ar"] .form-input-success {
   border-left-color: var(--success);
 }
+/* End add listing */
+
+/* ------------------------------------------------- */
+
+/* View listings */
+.listings-wrapper {
+  padding: 20px;
+  background-color: var(--white-smoke);
+}
+
+html[lang="ar"] .MuiTableCell-root {
+  text-align: start;
+}
+/* End view listings */
