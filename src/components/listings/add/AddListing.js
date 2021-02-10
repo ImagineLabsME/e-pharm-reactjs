@@ -174,7 +174,7 @@ const AddListing = () => {
   };
 
   return (
-    <section id="add-listings">
+    <section id="add-listings" className="page-section">
       <h1>Add a Listing</h1>
 
       <form id="add-listings-form">
