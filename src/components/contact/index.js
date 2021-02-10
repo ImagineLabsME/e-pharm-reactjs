@@ -109,9 +109,9 @@ const Contact = () => {
             data
           );
 
-          setSubmitMessage(res.data.data.message);
+          setSubmitMessage(res.data.message);
         } catch (error) {
-          setSubmitMessage(error.response.data.data.errorMessage);
+          setSubmitMessage(error.response.data.errorMessage);
         }
       };
 
