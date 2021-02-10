@@ -17,6 +17,7 @@ const ViewListings = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [listings, setListings] = useState([]);
   const [paginate, setPaginate] = useState(10);
+  const [listingsLength, setListingsLength] = useState();
   const [submitMessage, setSubmitMessage] = useState("");
 
   const fetchListings = async (paginate) => {
@@ -53,6 +54,7 @@ const ViewListings = () => {
         }
       );
 
+      setListingsLength(res.data.length);
       setListings(res.data.data);
     } catch (error) {
       setSubmitMessage(error.response.data.data.errorMessage);
@@ -78,8 +80,8 @@ const ViewListings = () => {
       <h1>Listings</h1>
 
       <div className="listings-wrapper">
-        <TableContainer component={Paper}>
-          <Table className={useStyles.table} aria-label="simple table">
+        <TableContainer component={ Paper }>
+          <Table className={ useStyles.table } aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
@@ -94,13 +96,13 @@ const ViewListings = () => {
             <TableBody>
               {listings &&
                 listings.map((listing) => (
-                  <TableRow key={listing["_id"]}>
-                    <TableCell>{listing.name}</TableCell>
-                    <TableCell>{listing.location}</TableCell>
-                    <TableCell>{listing.medication_name}</TableCell>
-                    <TableCell>{listing.quantity}</TableCell>
-                    <TableCell>{listing.createdAt}</TableCell>
-                    <TableCell>{listing.needed_by}</TableCell>
+                  <TableRow key={ listing["_id"] }>
+                    <TableCell>{ listing.name }</TableCell>
+                    <TableCell>{ listing.location }</TableCell>
+                    <TableCell>{ listing.medication_name }</TableCell>
+                    <TableCell>{ listing.quantity }</TableCell>
+                    <TableCell>{ listing.createdAt }</TableCell>
+                    <TableCell>{ listing.needed_by }</TableCell>
                     <TableCell>
                       <a
                         target="_blank"
@@ -125,18 +127,20 @@ const ViewListings = () => {
             color: "var(--danger)",
           }}
         >
-          {submitMessage}
+          { submitMessage }
         </p>
 
-        <button
-          style={{ marginTop: "20px" }}
-          className={`call-to-action-button margin-center ${
-            isLoading ? "call-to-action-loading-button" : ""
-          }`}
-          data-text="Load More"
-          onClick={fetchMoreData}
-          tabIndex={`${isLoading ? "-1" : ""}`}
-        ></button>
+        {listingsLength !== listings.length && (
+          <button
+            style={{ marginTop: "20px" }}
+            className={`call-to-action-button margin-center ${
+              isLoading ? "call-to-action-loading-button" : ""
+            }`}
+            data-text="Load More"
+            onClick={ fetchMoreData }
+            tabIndex={`${isLoading ? "-1" : ""}`}
+          ></button>
+        )}
       </div>
     </section>
   );
