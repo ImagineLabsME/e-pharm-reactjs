@@ -14,14 +14,22 @@
   margin: 0 auto;
 }
 
+.form-input-container {
+  margin-bottom: 20px;
+}
+
+.form-input-container > span {
+  font-size: 14px;
+}
+
 .form-input-label {
   color: var(--black);
 }
 
 .form-input {
   width: 100%;
-  height: 40px;
-  margin: 6px 0 12px;
+  height: 50px;
+  margin: 6px 0 0;
   border: none;
   border-radius: 6px;
   background-color: var(--white-smoke);
@@ -39,6 +47,10 @@
 
 .form-input-error {
   box-shadow: inset 0px 0px 3px var(--danger) !important;
+}
+
+.form-input-warning {
+  box-shadow: inset 0px 0px 3px var(--warning) !important;
 }
 
 .form-input-success {
@@ -61,14 +73,18 @@ html[lang="ar"] .form-input-error {
   border-left-color: var(--danger);
 }
 
+html[lang="ar"] .form-input-warning {
+  border-right-color: var(--warning);
+}
+
+html[lang="ar"] .form-input-warning {
+  border-left-color: var(--warning);
+}
+
 html[lang="ar"] .form-input-success {
   border-right-color: var(--success);
 }
 
 html[lang="ar"] .form-input-success {
   border-left-color: var(--success);
-}
-
-.DayPicker {
-  width: 100%;
 }
