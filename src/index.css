@@ -23,9 +23,10 @@ body,
   --base-color: #00b3df;
   --black: #0a0a0a;
   --white: #ffffff;
-  --white-smoke: #F5F5F5;
-  --success: #4bb543;
+  --white-smoke: #f5f5f5;
   --danger: #e52313;
+  --warning: #ffcc00;
+  --success: #4bb543;
 
   /* font family */
   --base-font-family: "Almarai", sans-serif;
@@ -86,11 +87,12 @@ h1 {
 }
 
 .call-to-action-button {
+  outline: none;
   position: relative;
   width: 160px;
   height: 50px;
   margin: 12px;
-  border: 2px solid var(--base-color);
+  border: 1px solid var(--base-color);
   border-radius: 26px;
   font-size: var(--base-font-size);
   font-weight: var(--bold);
@@ -102,12 +104,9 @@ h1 {
   z-index: 1;
 }
 
-.call-to-action-button:hover {
-  color: var(--white);
-}
-
+.call-to-action-button:hover,
 .call-to-action-button:focus {
-  outline: none;
+  color: var(--white);
 }
 
 .call-to-action-button::before {
@@ -126,11 +125,13 @@ h1 {
   transition: linear height 0.3s;
 }
 
-.call-to-action-button:hover::after {
+.call-to-action-button:hover::after,
+.call-to-action-button:focus::after {
   height: 100%;
 }
 
 .call-to-action-loading-button {
+  outline: none !important;
   width: 30px;
   height: 30px;
   content: "";
@@ -143,6 +144,11 @@ h1 {
 
 .call-to-action-loading-button::before {
   content: "";
+}
+
+.margin-center {
+  display: block;
+  margin: 0 auto;
 }
 
 @keyframes loadingEffect {
