@@ -18,7 +18,7 @@ const Error404 = () => {
         {
           params: {
             lang: cookie.language,
-            page_name: "404",
+            page_name: "notFound",
           },
         }
       );
