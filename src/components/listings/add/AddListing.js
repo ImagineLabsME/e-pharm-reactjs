@@ -193,7 +193,7 @@ const AddListing = () => {
         {
           params: {
             lang: cookie.language,
-            page_name: "sidebar",
+            page_name: "addListing",
           },
         }
       );

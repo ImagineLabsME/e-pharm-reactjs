@@ -18,7 +18,7 @@ const Homepage = () => {
         {
           params: {
             lang: cookie.language,
-            page_name: "homepage",
+            page_name: "home",
           },
         }
       );
