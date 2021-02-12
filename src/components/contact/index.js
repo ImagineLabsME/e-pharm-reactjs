@@ -1,12 +1,16 @@
 // npm packages
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import validator from "validator";
+import { useCookies } from "react-cookie";
 import axios from "axios";
 
 // styles
 import "./index.css";
 
 const Contact = () => {
+  const [cookie] = useCookies(["language"]);
+  const [localization, setLocalization] = useState({});
+
   const [data, setData] = useState({
     fullName: "",
     email: "",
@@ -49,12 +53,12 @@ const Contact = () => {
           }))
         : setDataErrors((previousState) => ({
             ...previousState,
-            emailError: "Invalid email",
+            emailError: localization.email_field_invalid,
           }));
     } else {
       setDataErrors((previousState) => ({
         ...previousState,
-        emailError: "Email field is required",
+        emailError: localization.email_field_required,
       }));
     }
 
@@ -65,7 +69,7 @@ const Contact = () => {
         }))
       : setDataErrors((previousState) => ({
           ...previousState,
-          fullNameError: "Name field is required",
+          fullNameError: localization.full_name_field_required,
         }));
 
     data.message
@@ -75,7 +79,7 @@ const Contact = () => {
         }))
       : setDataErrors((previousState) => ({
           ...previousState,
-          messageError: "Message field is required",
+          messageError: localization.message_field_required,
         }));
 
     if (data.fullName && data.message && data.email && isEmail) {
@@ -125,13 +129,31 @@ const Contact = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/content/pages/`,
+        {
+          params: {
+            lang: cookie.language,
+            page_name: "contact",
+          },
+        }
+      );
+
+      setLocalization(res.data);
+    };
+
+    fetchData();
+  }, [cookie.language]);
+
   return (
     <section id="contact-us" className="page-section">
-      <h1>contact</h1>
+      <h1>{ localization.title_header }</h1>
 
       <form className="contact-us-form">
         <div className="form-input-container">
-          <label className="form-input-label">Name*</label>
+          <label className="form-input-label">{ localization.full_name_label }</label>
           <input
             name="fullName"
             type="text"
@@ -145,13 +167,13 @@ const Contact = () => {
         </div>
 
         <div className="form-input-container">
-          <label className="form-input-label">Email*</label>
+          <label className="form-input-label">{ localization.email_label }</label>
           <input
             name="email"
             type="email"
             className={`form-input ${
               dataErrors.emailError
-                ? dataErrors.emailError === "Invalid email"
+                ? dataErrors.emailError === localization.email_field_invalid
                   ? "form-input-warning"
                   : "form-input-error"
                 : ""
@@ -163,7 +185,7 @@ const Contact = () => {
         </div>
 
         <div className="form-input-container">
-          <label className="form-input-label">Message*</label>
+          <label className="form-input-label">{ localization.message_label }</label>
           <textarea
             style={{ resize: "none", height: "auto" }}
             rows="5"
@@ -183,7 +205,7 @@ const Contact = () => {
           className={`call-to-action-button margin-center ${
             isLoading ? "call-to-action-loading-button" : ""
           }`}
-          data-text="Submit"
+          data-text={ localization.submit_button }
           onClick={ handleSubmit }
           tabIndex={`${isLoading ? "-1" : ""}`}
         ></button>

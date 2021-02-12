@@ -9,6 +9,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { useCookies } from "react-cookie";
 
 // styles
 import "../index.css";
@@ -19,6 +20,8 @@ const ViewListings = () => {
   const [paginate, setPaginate] = useState(10);
   const [listingsLength, setListingsLength] = useState();
   const [submitMessage, setSubmitMessage] = useState("");
+  const [cookie] = useCookies(["language"]);
+  const [localization, setLocalization] = useState({});
 
   const fetchListings = async (paginate) => {
     try {
@@ -65,6 +68,24 @@ const ViewListings = () => {
     fetchListings(paginate);
   }, [paginate]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/content/pages/`,
+        {
+          params: {
+            lang: cookie.language,
+            page_name: "viewListings",
+          },
+        }
+      );
+
+      setLocalization(res.data);
+    };
+
+    fetchData();
+  }, [cookie.language]);
+
   const fetchMoreData = () => {
     setPaginate(paginate + 10);
   };
@@ -77,20 +98,20 @@ const ViewListings = () => {
 
   return (
     <section id="view-listing" className="page-section">
-      <h1>Listings</h1>
+      <h1>{ localization.title_header }</h1>
 
       <div className="listings-wrapper">
         <TableContainer component={ Paper }>
           <Table className={ useStyles.table } aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Location</TableCell>
-                <TableCell>Medication Name</TableCell>
-                <TableCell>Quantity</TableCell>
-                <TableCell>Created At</TableCell>
-                <TableCell>Needed By</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell>{ localization.name_table_cell }</TableCell>
+                <TableCell>{ localization.location_table_cell }</TableCell>
+                <TableCell>{ localization.medication_name_table_cell }</TableCell>
+                <TableCell>{ localization.quantity_table_cell }</TableCell>
+                <TableCell>{ localization.created_at_table_cell }</TableCell>
+                <TableCell>{ localization.needed_by_table_cell }</TableCell>
+                <TableCell>{ localization.actions_label_cell }</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -110,7 +131,7 @@ const ViewListings = () => {
                         rel="noopener noreferrer"
                         style={{ color: "var(--base-color)" }}
                       >
-                        I can Provide{" "}
+                        { localization.provide_action + " " }
                         <i className="fas fa-hand-holding-medical"></i>
                       </a>
                     </TableCell>
@@ -136,7 +157,7 @@ const ViewListings = () => {
             className={`call-to-action-button margin-center ${
               isLoading ? "call-to-action-loading-button" : ""
             }`}
-            data-text="Load More"
+            data-text={ localization.load_more_button }
             onClick={ fetchMoreData }
             tabIndex={`${isLoading ? "-1" : ""}`}
           ></button>
