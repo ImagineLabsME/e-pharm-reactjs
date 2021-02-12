@@ -1,0 +1,87 @@
+#sidebar {
+  position: fixed;
+  top: 0px;
+  width: 200px;
+  height: 100%;
+  background-color: var(--black);
+  box-shadow: 0px 2px 5px 2px rgb(0 0 0 / 16%);
+  z-index: 20;
+}
+
+#sidebar > ul {
+  color: var(--base-color);
+  width: 100%;
+}
+
+#sidebar > ul > li > a > i,
+#close-sidebar > i {
+  width: 20px;
+}
+
+#sidebar > ul > li > a > span,
+#close-sidebar > span {
+  order: 2;
+  margin: 0 12px;
+}
+
+#close-sidebar {
+  display: flex;
+  align-items: baseline;
+}
+
+#sidebar > ul > li > a {
+  display: flex;
+  align-items: baseline;
+}
+
+#sidebar > ul > li {
+  height: 40px;
+  padding: 0px 12px;
+  line-height: 40px;
+  cursor: pointer;
+  list-style: none;
+}
+
+#sidebar > ul > li:hover {
+  background-color: var(--base-color);
+  color: var(--black);
+}
+
+html[lang="ar"] #sidebar {
+  right: 0px;
+  animation: animateRight .5s;
+}
+
+@keyframes animateRight {
+  from {right: -200px;}
+  to {right: 0px;}
+}
+
+html[lang="en"] #sidebar {
+  left: 0px;
+  animation: animateLeft .5s;
+}
+
+@keyframes animateLeft {
+  from {left: -200px;}
+  to {left: 0px;}
+}
+
+@media only screen and (max-width: 575px) {
+  #sidebar {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+  }
+
+  #sidebar > ul > li > a,
+  #close-sidebar {
+    justify-content: center;
+  }
+}
+
+
