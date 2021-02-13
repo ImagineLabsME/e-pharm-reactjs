@@ -1,22 +1,40 @@
 // npm packages
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import { useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 
 // components
 import Sidebar from "./sidebar";
 import Header from "./header";
 import Error404 from "./error404";
 import Homepage from "./homepage";
+import Contact from "./contact";
 import AddListing from "./listings/add/AddListing";
+import ViewListings from "./listings/view/ViewListings";
 
 const App = () => {
-  // const [cookie, setCookie] = useCookies(["language"]);
+  const [cookie, setCookie] = useCookies(["language"]);
   const [isSidebar, setSidebar] = useState(false);
 
-  // useEffect(() => {
-  //   setCookie("language", "AR", { path: "/" });
-  // }, [setCookie]);
+  if (cookie.language === undefined) {
+    setCookie("language", "AR", { path: "/" });
+  }
+
+  useEffect(() => {
+    const htmlTag = document.querySelector("html");
+
+    if (cookie.language !== undefined) {
+      if (cookie.language === "AR") {
+        htmlTag.setAttribute("dir", "rtl");
+        htmlTag.setAttribute("lang", "ar");
+      } else {
+        htmlTag.setAttribute("dir", "ltr");
+        htmlTag.setAttribute("lang", "en");
+      }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cookie.language]);
 
   const toggleSidebar = () => {
     setSidebar(!isSidebar);
@@ -24,11 +42,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {isSidebar ? (
-        <Sidebar toggleSidebar={ toggleSidebar } />
-      ) : (
-        ""
-      )}
+      {isSidebar ? <Sidebar toggleSidebar={ toggleSidebar } /> : ""}
 
       <div
         id="router-components"
@@ -39,6 +53,8 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={ Homepage } />
           <Route exact path="/listings/add" component={ AddListing } />
+          <Route exact path="/listings/view" component={ ViewListings } />
+          <Route exact path="/contact" component={ Contact } />
           <Route path="*" component={ Error404 } />
         </Switch>
       </div>

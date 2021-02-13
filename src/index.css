@@ -81,6 +81,11 @@ h1 {
   margin: 12px 0;
 }
 
+input,
+textarea {
+  font-family: var(--base-font-family);
+}
+
 #router-components {
   margin-top: var(--header-height);
   transition: margin 0.5s;
@@ -131,7 +136,6 @@ h1 {
 }
 
 .call-to-action-loading-button {
-  outline: none !important;
   width: 30px;
   height: 30px;
   content: "";
@@ -140,6 +144,11 @@ h1 {
   border-radius: 100%;
   pointer-events: none;
   animation: 0.8s linear infinite loadingEffect;
+}
+
+.call-to-action-loading-button:focus::after {
+  width: 0px;
+  height: 0px;
 }
 
 .call-to-action-loading-button::before {

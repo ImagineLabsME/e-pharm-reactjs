@@ -1,18 +1,22 @@
 // npm packages
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import validator from "validator";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 
 // styles
 import "../index.css";
 
 const AddListing = () => {
+  const [cookie] = useCookies(["language"]);
+  const [localization, setLocalization] = useState({});
+
   const [data, setData] = useState({
     name: "",
     phone: "",
     location: "",
     medication_name: "",
-    quantity: "",
+    quantity: 1,
     needed_by: "",
   });
 
@@ -57,12 +61,12 @@ const AddListing = () => {
           }))
         : setDataErrors((previousState) => ({
             ...previousState,
-            dateError: "Date must be greater than today",
+            dateError: localization.date_field_invalid,
           }));
     } else {
       setDataErrors((previousState) => ({
         ...previousState,
-        dateError: "Date field is required",
+        dateError: localization.date_field_required,
       }));
     }
 
@@ -74,12 +78,12 @@ const AddListing = () => {
           }))
         : setDataErrors((previousState) => ({
             ...previousState,
-            phoneError: "Invalid phone number",
+            phoneError: localization.phone_field_invalid,
           }));
     } else {
       setDataErrors((previousState) => ({
         ...previousState,
-        phoneError: "Phone field is required",
+        phoneError: localization.phone_field_required,
       }));
     }
 
@@ -90,7 +94,7 @@ const AddListing = () => {
         }))
       : setDataErrors((previousState) => ({
           ...previousState,
-          quantityError: "Quantity field is required",
+          quantityError: localization.quantity_field_required,
         }));
 
     data.name
@@ -100,7 +104,7 @@ const AddListing = () => {
         }))
       : setDataErrors((previousState) => ({
           ...previousState,
-          nameError: "Name field is required",
+          nameError: localization.name_field_required,
         }));
 
     data.medication_name
@@ -110,7 +114,7 @@ const AddListing = () => {
         }))
       : setDataErrors((previousState) => ({
           ...previousState,
-          medicationNameError: "Medication name field is required",
+          medicationNameError: localization.medication_name_field_required,
         }));
 
     data.location
@@ -120,7 +124,7 @@ const AddListing = () => {
         }))
       : setDataErrors((previousState) => ({
           ...previousState,
-          locationError: "Location field is required",
+          locationError: localization.location_field_required,
         }));
 
     if (
@@ -163,6 +167,15 @@ const AddListing = () => {
             data
           );
 
+          res.data.status === "success" && setData({
+            name: "",
+            phone: "",
+            location: "",
+            medication_name: "",
+            quantity: 1,
+            needed_by: "",
+          });
+
           setSubmitMessage(res.data.data.message);
         } catch (error) {
           setSubmitMessage(error.response.data.data.errorMessage);
@@ -173,75 +186,98 @@ const AddListing = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/api/content/pages/`,
+        {
+          params: {
+            lang: cookie.language,
+            page_name: "addListing",
+          },
+        }
+      );
+
+      setLocalization(res.data);
+    };
+
+    fetchData();
+  }, [cookie.language]);
+
   return (
-    <section id="add-listings">
-      <h1>Add a Listing</h1>
+    <section id="add-listings" className="page-section">
+      <h1>{ localization.title_header }</h1>
 
       <form id="add-listings-form">
         <div className="form-input-container">
-          <label className="form-input-label">Name*</label>
+          <label className="form-input-label">{ localization.name_label }</label>
           <input
             name="name"
             type="text"
             className={`form-input ${
               dataErrors.nameError ? "form-input-error" : ""
             }`}
+            value={ data.name }
             onChange={ handleInputChange }
           />
           <span>{ dataErrors.nameError }</span>
         </div>
 
         <div className="form-input-container">
-          <label className="form-input-label">Phone*</label>
+          <label className="form-input-label">{ localization.phone_label }</label>
           <input
             name="phone"
             type="tel"
             className={`form-input ${
               dataErrors.phoneError
-                ? dataErrors.phoneError === "Invalid phone number"
+                ? dataErrors.phoneError === localization.phone_field_invalid
                   ? "form-input-warning"
                   : "form-input-error"
                 : ""
             }`}
+            value={ data.phone }
             onChange={ handleInputChange }
           />
           <span>{ dataErrors.phoneError }</span>
         </div>
 
         <div className="form-input-container">
-          <label className="form-input-label">Location*</label>
+          <label className="form-input-label">{ localization.location_label }</label>
           <input
             name="location"
             type="text"
             className={`form-input ${
               dataErrors.locationError ? "form-input-error" : ""
             }`}
+            value={ data.location }
             onChange={ handleInputChange }
           />
           <span>{ dataErrors.locationError }</span>
         </div>
 
         <div className="form-input-container">
-          <label className="form-input-label">Medication name*</label>
+          <label className="form-input-label">{ localization.medication_name_label }</label>
           <input
             name="medication_name"
             type="text"
             className={`form-input ${
               dataErrors.medicationNameError ? "form-input-error" : ""
             }`}
+            value={ data.medication_name }
             onChange={ handleInputChange }
           />
           <span>{ dataErrors.medicationNameError }</span>
         </div>
 
         <div className="form-input-container">
-          <label className="form-input-label">Quantity*</label>
+          <label className="form-input-label">{ localization.quantity_label }</label>
           <input
             name="quantity"
             type="number"
             className={`form-input ${
               dataErrors.quantityError ? "form-input-error" : ""
             }`}
+            value={ data.quantity }
             onChange={ handleInputChange }
             min="1"
           />
@@ -249,17 +285,18 @@ const AddListing = () => {
         </div>
 
         <div className="form-input-container">
-          <label className="form-input-label">Needed By*</label>
+          <label className="form-input-label">{ localization.needed_by_label }</label>
           <input
             name="needed_by"
             type="date"
             className={`form-input ${
               dataErrors.dateError
-                ? dataErrors.dateError === "Date must be greater than today"
+                ? dataErrors.dateError === localization.date_field_invalid
                   ? "form-input-warning"
                   : "form-input-error"
                 : ""
             }`}
+            value={ data.needed_by }
             onChange={ handleInputChange }
           />
           <span>{ dataErrors.dateError }</span>
@@ -271,7 +308,7 @@ const AddListing = () => {
           className={`call-to-action-button margin-center ${
             isLoading ? "call-to-action-loading-button" : ""
           }`}
-          data-text="Submit"
+          data-text={ localization.submit_button }
           onClick={ handleSubmit }
           tabIndex={ `${isLoading ? "-1" : ""}` }
         ></button>

@@ -1,8 +1,9 @@
-#add-listings {
+/* Add listing */
+.page-section {
   padding: 12px;
 }
 
-#add-listings > h1 {
+.page-section > h1 {
   width: 100%;
   text-align: center;
   color: var(--black);
@@ -69,7 +70,7 @@ html[lang="ar"] .form-input-error {
   border-right-color: var(--danger);
 }
 
-html[lang="ar"] .form-input-error {
+html[lang="en"] .form-input-error {
   border-left-color: var(--danger);
 }
 
@@ -77,7 +78,7 @@ html[lang="ar"] .form-input-warning {
   border-right-color: var(--warning);
 }
 
-html[lang="ar"] .form-input-warning {
+html[lang="en"] .form-input-warning {
   border-left-color: var(--warning);
 }
 
@@ -85,6 +86,20 @@ html[lang="ar"] .form-input-success {
   border-right-color: var(--success);
 }
 
-html[lang="ar"] .form-input-success {
+html[lang="en"] .form-input-success {
   border-left-color: var(--success);
 }
+/* End add listing */
+
+/* ------------------------------------------------- */
+
+/* View listings */
+.listings-wrapper {
+  padding: 20px;
+  background-color: var(--white-smoke);
+}
+
+html[lang="ar"] .MuiTableCell-root {
+  text-align: start;
+}
+/* End view listings */
