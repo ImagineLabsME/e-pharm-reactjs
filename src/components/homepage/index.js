@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 
+// components
+import ViewListings from "../listings/view/ViewListings";
+
 // styles
 import "./index.css";
 
@@ -30,27 +33,23 @@ const Homepage = () => {
   }, [cookie.language]);
 
   return (
-    <section id="homepage">
-      <h1>{ localization.title_header }</h1>
+    <>
+      <section id="homepage">
+        <h1 style={{ textAlign: "center" }}>{localization.title_header}</h1>
 
-      <p>{ localization.paragraph }</p>
+        <p>{localization.paragraph}</p>
 
-      <div id="homepage-call-to-action-buttons">
-        <Link to="/listings/view">
-          <button
-            className="call-to-action-button"
-            data-text={ localization.view_listings_button }
-          ></button>
-        </Link>
-
-        <Link to="/listings/add">
-          <button
-            className="call-to-action-button"
-            data-text={ localization.add_listing_button }
-          ></button>
-        </Link>
-      </div>
-    </section>
+        <div id="homepage-call-to-action-buttons">
+          <Link to="/listing/add">
+            <button
+              className="call-to-action-button"
+              data-text={localization.add_listing_button}
+            ></button>
+          </Link>
+        </div>
+      </section>
+      <ViewListings />
+    </>
   );
 };
 

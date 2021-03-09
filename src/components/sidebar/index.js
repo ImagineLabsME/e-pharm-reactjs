@@ -32,35 +32,32 @@ const Sidebar = ({ toggleSidebar }) => {
   return (
     <nav id="sidebar">
       <ul className="sidebar-unordered-list">
-        <li className="sidebar-list-item" onClick={ toggleSidebar } id="close-sidebar">
-          <span>{ localization.sidebar_item_1 }</span>
+        <li
+          className="sidebar-list-item"
+          onClick={toggleSidebar}
+          id="close-sidebar"
+        >
+          <span>{localization.sidebar_item_1}</span>
           <i className="fas fa-times"></i>
         </li>
 
-        <li className="sidebar-list-item" onClick={ toggleSidebar }>
+        <li className="sidebar-list-item" onClick={toggleSidebar}>
           <Link className="sidebar-link" to="/">
-            <span>{ localization.sidebar_item_2 }</span>
+            <span>{localization.sidebar_item_2}</span>
             <i className="fas fa-home"></i>
           </Link>
         </li>
 
-        <li className="sidebar-list-item" onClick={ toggleSidebar }>
-          <Link className="sidebar-link" to="/listings/view">
-            <span>{ localization.sidebar_item_3 }</span>
-            <i className="fas fa-list"></i>
-          </Link>
-        </li>
-
-        <li className="sidebar-list-item" onClick={ toggleSidebar }>
-          <Link className="sidebar-link" to="/listings/add">
-            <span>{ localization.sidebar_item_4 }</span>
+        <li className="sidebar-list-item" onClick={toggleSidebar}>
+          <Link className="sidebar-link" to="/listing/add">
+            <span>{localization.sidebar_item_4}</span>
             <i className="fas fa-plus"></i>
           </Link>
         </li>
 
-        <li className="sidebar-list-item" onClick={ toggleSidebar }>
+        <li className="sidebar-list-item" onClick={toggleSidebar}>
           <Link className="sidebar-link" to="/contact">
-            <span>{ localization.sidebar_item_5 }</span>
+            <span>{localization.sidebar_item_5}</span>
             <i className="fas fa-hands-helping"></i>
           </Link>
         </li>

@@ -22,7 +22,10 @@
   cursor: pointer;
   border: none;
   border-bottom: 1px solid transparent;
-  transition: border-bottom .3s;
+  -webkit-transition: border-bottom 0.3s;
+  -moz-transition: border-bottom 0.3s;
+  -o-transition: border-bottom 0.3s;
+  transition: border-bottom 0.3s;
 }
 
 #switch-language > select:hover,
