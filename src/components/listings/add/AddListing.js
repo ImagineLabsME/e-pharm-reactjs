@@ -293,6 +293,7 @@ const AddListing = () => {
             value={data.quantity}
             onChange={handleInputChange}
             min="1"
+            max="5"
           />
           <span>{dataErrors.quantityError}</span>
         </div>
