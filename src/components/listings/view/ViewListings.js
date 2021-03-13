@@ -187,7 +187,7 @@ const ViewListings = () => {
                     <TableCell>
                       <a
                         target="_blank"
-                        href={`https://wa.me/${listing.phone}`}
+                        href={`https://wa.me/00961${listing.phone}`}
                         rel="noopener noreferrer"
                         style={{ color: "var(--base-color)" }}
                       >

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import validator from "validator";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import SelectCities from "./SelectCities";
 
 // styles
 import "../index.css";
@@ -45,6 +46,14 @@ const AddListing = () => {
         throw new Error("Invalid case");
     }
   };
+
+  const handleSelectField = (value) => {
+    setData((previousState) => ({ ...previousState, location: value }));
+  };
+
+  useEffect(() => {
+    handleSelectField("");
+  }, [cookie.language]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -167,14 +176,15 @@ const AddListing = () => {
             data
           );
 
-          res.data.status === "success" && setData({
-            name: "",
-            phone: "",
-            location: "",
-            medication_name: "",
-            quantity: 1,
-            needed_by: "",
-          });
+          res.data.status === "success" &&
+            setData({
+              name: "",
+              phone: "",
+              location: "",
+              medication_name: "",
+              quantity: 1,
+              needed_by: "",
+            });
 
           setSubmitMessage(res.data.data.message);
         } catch (error) {
@@ -206,25 +216,25 @@ const AddListing = () => {
 
   return (
     <section id="add-listings" className="page-section">
-      <h1>{ localization.title_header }</h1>
+      <h1>{localization.title_header}</h1>
 
       <form id="add-listings-form">
         <div className="form-input-container">
-          <label className="form-input-label">{ localization.name_label }</label>
+          <label className="form-input-label">{localization.name_label}</label>
           <input
             name="name"
             type="text"
             className={`form-input ${
               dataErrors.nameError ? "form-input-error" : ""
             }`}
-            value={ data.name }
-            onChange={ handleInputChange }
+            value={data.name}
+            onChange={handleInputChange}
           />
-          <span>{ dataErrors.nameError }</span>
+          <span>{dataErrors.nameError}</span>
         </div>
 
         <div className="form-input-container">
-          <label className="form-input-label">{ localization.phone_label }</label>
+          <label className="form-input-label">{localization.phone_label}</label>
           <input
             name="phone"
             type="tel"
@@ -235,57 +245,62 @@ const AddListing = () => {
                   : "form-input-error"
                 : ""
             }`}
-            value={ data.phone }
-            onChange={ handleInputChange }
+            value={data.phone}
+            onChange={handleInputChange}
           />
-          <span>{ dataErrors.phoneError }</span>
+          <span>{dataErrors.phoneError}</span>
         </div>
 
         <div className="form-input-container">
-          <label className="form-input-label">{ localization.location_label }</label>
-          <input
-            name="location"
-            type="text"
-            className={`form-input ${
-              dataErrors.locationError ? "form-input-error" : ""
-            }`}
-            value={ data.location }
-            onChange={ handleInputChange }
+          <label className="form-input-label">
+            {localization.location_label}
+          </label>
+          <SelectCities
+            language={cookie.language}
+            location={data.location}
+            handleInputChange={handleSelectField}
+            locationError={dataErrors.locationError}
           />
-          <span>{ dataErrors.locationError }</span>
+          <span>{dataErrors.locationError}</span>
         </div>
 
         <div className="form-input-container">
-          <label className="form-input-label">{ localization.medication_name_label }</label>
+          <label className="form-input-label">
+            {localization.medication_name_label}
+          </label>
           <input
             name="medication_name"
             type="text"
             className={`form-input ${
               dataErrors.medicationNameError ? "form-input-error" : ""
             }`}
-            value={ data.medication_name }
-            onChange={ handleInputChange }
+            value={data.medication_name}
+            onChange={handleInputChange}
           />
-          <span>{ dataErrors.medicationNameError }</span>
+          <span>{dataErrors.medicationNameError}</span>
         </div>
 
         <div className="form-input-container">
-          <label className="form-input-label">{ localization.quantity_label }</label>
+          <label className="form-input-label">
+            {localization.quantity_label}
+          </label>
           <input
             name="quantity"
             type="number"
             className={`form-input ${
               dataErrors.quantityError ? "form-input-error" : ""
             }`}
-            value={ data.quantity }
-            onChange={ handleInputChange }
+            value={data.quantity}
+            onChange={handleInputChange}
             min="1"
           />
-          <span>{ dataErrors.quantityError }</span>
+          <span>{dataErrors.quantityError}</span>
         </div>
 
         <div className="form-input-container">
-          <label className="form-input-label">{ localization.needed_by_label }</label>
+          <label className="form-input-label">
+            {localization.needed_by_label}
+          </label>
           <input
             name="needed_by"
             type="date"
@@ -296,21 +311,21 @@ const AddListing = () => {
                   : "form-input-error"
                 : ""
             }`}
-            value={ data.needed_by }
-            onChange={ handleInputChange }
+            value={data.needed_by}
+            onChange={handleInputChange}
           />
-          <span>{ dataErrors.dateError }</span>
+          <span>{dataErrors.dateError}</span>
         </div>
 
-        <p style={{ textAlign: "center", margin: "12px 0" }}>{ submitMessage }</p>
+        <p style={{ textAlign: "center", margin: "12px 0" }}>{submitMessage}</p>
 
         <button
           className={`call-to-action-button margin-center ${
             isLoading ? "call-to-action-loading-button" : ""
           }`}
-          data-text={ localization.submit_button }
-          onClick={ handleSubmit }
-          tabIndex={ `${isLoading ? "-1" : ""}` }
+          data-text={localization.submit_button}
+          onClick={handleSubmit}
+          tabIndex={`${isLoading ? "-1" : ""}`}
         ></button>
       </form>
     </section>

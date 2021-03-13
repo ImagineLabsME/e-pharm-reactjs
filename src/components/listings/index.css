@@ -27,7 +27,8 @@
   color: var(--black);
 }
 
-.form-input {
+.form-input,
+#select-cities-field {
   width: 100%;
   height: 50px;
   margin: 6px 0 0;
@@ -37,19 +38,21 @@
   line-height: 40px;
   font-size: var(--base-font-size);
   color: var(--base-color);
-  padding: 0 6px;
+  padding: 0 6px !important;
   -webkit-transition: box-shadow 0.3s, border-color 0.3s;
   -moz-transition: box-shadow 0.3s, border-color 0.3s;
   -o-transition: box-shadow 0.3s, border-color 0.3s;
   transition: box-shadow 0.3s, border-color 0.3s;
 }
 
-.form-input:focus {
+.form-input:focus,
+#select-cities-field:focus {
   outline: none;
   box-shadow: inset 0px 0px 3px;
 }
 
-.form-input-error {
+.form-input-error,
+.select-cities-field-error #select-cities-field {
   box-shadow: inset 0px 0px 3px var(--danger) !important;
 }
 
@@ -61,19 +64,23 @@
   box-shadow: inset 0px 0px 3px var(--success) !important;
 }
 
-html[lang="ar"] .form-input {
+html[lang="ar"] .form-input,
+html[lang="ar"] #select-cities-field {
   border-right: 5px solid var(--base-color);
 }
 
-html[lang="en"] .form-input {
+html[lang="en"] .form-input,
+html[lang="en"] #select-cities-field {
   border-left: 5px solid var(--base-color);
 }
 
-html[lang="ar"] .form-input-error {
+html[lang="ar"] .form-input-error,
+html[lang="ar"] .select-cities-field-error #select-cities-field {
   border-right-color: var(--danger);
 }
 
-html[lang="en"] .form-input-error {
+html[lang="en"] .form-input-error,
+html[lang="en"] .select-cities-field-error #select-cities-field {
   border-left-color: var(--danger);
 }
 
@@ -140,3 +147,19 @@ html[lang="ar"] .MuiTableCell-root {
   border-bottom-color: var(--base-color);
 }
 /* End view listings */
+
+.MuiInput-underline::before,
+.MuiInput-underline::after {
+  display: none;
+}
+
+.MuiInput-formControl,
+.MuiInput-formControl input,
+.MuiFormControl-root {
+  padding: 0 !important;
+}
+
+html[dir="rtl"] .MuiAutocomplete-endAdornment {
+  right: unset !important;
+  left: 0;
+}
