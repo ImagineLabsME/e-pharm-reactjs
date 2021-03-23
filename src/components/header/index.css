@@ -12,8 +12,45 @@
   padding: 0 12px;
 }
 
-#header-logo {
-  margin: 0 auto;
+#switch-language > select {
+  padding: 12px;
+  text-align: center;
+  background-color: transparent;
+  color: var(--white);
+  font-size: var(--base-font-size);
+  outline: none;
+  cursor: pointer;
+  border: none;
+  border-bottom: 1px solid transparent;
+  -webkit-transition: border-bottom 0.3s;
+  -moz-transition: border-bottom 0.3s;
+  -o-transition: border-bottom 0.3s;
+  transition: border-bottom 0.3s;
+}
+
+#switch-language > select:hover,
+#switch-language > select:focus {
+  border-bottom-color: var(--white);
+}
+
+#switch-language > select > option {
+  background-color: var(--base-color);
+}
+
+html[lang="ar"] #switch-language {
+  margin-right: auto;
+}
+
+html[lang="en"] #switch-language {
+  margin-left: auto;
+}
+
+html[lang="ar"] #header-logo {
+  margin-right: 12px;
+}
+
+html[lang="en"] #header-logo {
+  margin-left: 12px;
 }
 
 #burger-menu > i {

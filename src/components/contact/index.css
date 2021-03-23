@@ -1,0 +1,12 @@
+#contact-us {
+    min-height: var(--full-height-section);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contact-us-form {
+    width: 100%;
+    max-width: 375px;
+}

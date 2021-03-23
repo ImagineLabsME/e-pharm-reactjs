@@ -1,8 +1,9 @@
-#add-listings {
+/* Add listing */
+.page-section {
   padding: 12px;
 }
 
-#add-listings > h1 {
+.page-section > h1 {
   width: 100%;
   text-align: center;
   color: var(--black);
@@ -14,61 +15,151 @@
   margin: 0 auto;
 }
 
+.form-input-container {
+  margin-bottom: 20px;
+}
+
+.form-input-container > span {
+  font-size: 14px;
+}
+
 .form-input-label {
   color: var(--black);
 }
 
-.form-input {
+.form-input,
+#select-cities-field {
   width: 100%;
-  height: 40px;
-  margin: 6px 0 12px;
+  height: 50px;
+  margin: 6px 0 0;
   border: none;
   border-radius: 6px;
   background-color: var(--white-smoke);
   line-height: 40px;
   font-size: var(--base-font-size);
   color: var(--base-color);
-  padding: 0 6px;
+  padding: 0 6px !important;
+  -webkit-transition: box-shadow 0.3s, border-color 0.3s;
+  -moz-transition: box-shadow 0.3s, border-color 0.3s;
+  -o-transition: box-shadow 0.3s, border-color 0.3s;
   transition: box-shadow 0.3s, border-color 0.3s;
 }
 
-.form-input:focus {
+.form-input:focus,
+#select-cities-field:focus {
   outline: none;
   box-shadow: inset 0px 0px 3px;
 }
 
-.form-input-error {
+.form-input-error,
+.select-cities-field-error #select-cities-field {
   box-shadow: inset 0px 0px 3px var(--danger) !important;
+}
+
+.form-input-warning {
+  box-shadow: inset 0px 0px 3px var(--warning) !important;
 }
 
 .form-input-success {
   box-shadow: inset 0px 0px 3px var(--success) !important;
 }
 
-html[lang="ar"] .form-input {
+html[lang="ar"] .form-input,
+html[lang="ar"] #select-cities-field {
   border-right: 5px solid var(--base-color);
 }
 
-html[lang="en"] .form-input {
+html[lang="en"] .form-input,
+html[lang="en"] #select-cities-field {
   border-left: 5px solid var(--base-color);
 }
 
-html[lang="ar"] .form-input-error {
+html[lang="ar"] .form-input-error,
+html[lang="ar"] .select-cities-field-error #select-cities-field {
   border-right-color: var(--danger);
 }
 
-html[lang="ar"] .form-input-error {
+html[lang="en"] .form-input-error,
+html[lang="en"] .select-cities-field-error #select-cities-field {
   border-left-color: var(--danger);
+}
+
+html[lang="ar"] .form-input-warning {
+  border-right-color: var(--warning);
+}
+
+html[lang="en"] .form-input-warning {
+  border-left-color: var(--warning);
 }
 
 html[lang="ar"] .form-input-success {
   border-right-color: var(--success);
 }
 
-html[lang="ar"] .form-input-success {
+html[lang="en"] .form-input-success {
   border-left-color: var(--success);
 }
+/* End add listing */
 
-.DayPicker {
+/* ------------------------------------------------- */
+
+/* View listings */
+.listings-wrapper {
+  padding: 20px;
+  background-color: var(--white-smoke);
+}
+
+html[lang="ar"] .MuiTableCell-root {
+  text-align: start;
+}
+
+.refresh {
+  animation: 0.8s linear infinite refreshEffect;
+}
+
+@keyframes refreshEffect {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.search-field {
+  height: 32px;
+  background: unset;
+  border: unset;
+  border-bottom: 1px solid #00000016;
+  padding: 0 6px;
+  font-size: 24px;
   width: 100%;
+  max-width: 180px;
+  outline: none;
+  -webkit-transition: border-bottom-color 0.3s;
+  -moz-transition: border-bottom-color 0.3s;
+  -o-transition: border-bottom-color 0.3s;
+  transition: border-bottom-color 0.3s;
+}
+
+.search-field:hover,
+.search-field:focus {
+  border-bottom-color: var(--base-color);
+}
+/* End view listings */
+
+.MuiInput-underline::before,
+.MuiInput-underline::after {
+  display: none;
+}
+
+.MuiInput-formControl,
+.MuiInput-formControl input,
+.MuiFormControl-root {
+  padding: 0 !important;
+}
+
+html[dir="rtl"] .MuiAutocomplete-endAdornment {
+  right: unset !important;
+  left: 0;
 }

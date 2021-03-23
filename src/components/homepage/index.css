@@ -1,5 +1,4 @@
 #homepage {
-  min-height: var(--full-height-section);
   padding: 12px;
   display: flex;
   flex-direction: column;
